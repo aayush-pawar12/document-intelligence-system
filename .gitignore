@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Node (only used to build the Word doc)
+node_modules/
+package-lock.json
+package.json
+
+# Build artifacts
+*.pdf
+!samples/report.pdf
