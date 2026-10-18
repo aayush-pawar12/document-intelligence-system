@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Document Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="paper"><div class="grain"></div></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg></span>
+      <div>
+        <h1 class="display">Document Intelligence</h1>
+        <p class="sub">Ask plain-English questions about PDF, Excel &amp; CSV files</p>
+      </div>
+    </div>
+    <span class="tagbadge">No LLM · rule-based</span>
+  </header>
+
+  <main>
+    <section class="panel reveal">
+      <h2 class="display">Give it a document, ask a question.</h2>
+
+      <!-- source picker -->
+      <div class="source">
+        <div class="source-col">
+          <label class="lbl">Use a sample</label>
+          <select id="sampleSel"><option value="">— choose a sample —</option></select>
+        </div>
+        <div class="or">or</div>
+        <div class="source-col">
+          <label class="lbl">Upload your own</label>
+          <label class="drop" id="drop">
+            <input type="file" id="fileInput" accept=".pdf,.csv,.tsv,.xlsx,.xls,.xlsm" hidden />
+            <span id="dropText">Drop a file or <u>browse</u> — PDF, Excel, CSV</span>
+          </label>
+        </div>
+      </div>
+      <p id="activeFile" class="active-file hidden"></p>
+
+      <!-- query -->
+      <label class="lbl" for="queryInput">Your question</label>
+      <div class="query-row">
+        <input id="queryInput" type="text" placeholder="e.g. list all employees from Mumbai" autocomplete="off" />
+        <button id="askBtn" class="btn primary"><span>Analyze</span></button>
+      </div>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <!-- loading -->
+    <div id="loading" class="state hidden"><div class="orbit"><span></span><span></span><span></span></div><p>Reading the document &amp; understanding your query…</p></div>
+    <!-- error -->
+    <div id="error" class="state error hidden"><div class="err-icon">!</div><p id="errorMsg"></p></div>
+
+    <!-- result -->
+    <section id="result" class="panel result hidden reveal">
+      <div class="fields">
+        <div class="field"><span class="f-label">File type</span><span id="rFile" class="f-val"></span></div>
+        <div class="field"><span class="f-label">Detected intent</span><span id="rIntent" class="f-val intent"></span></div>
+        <div class="field"><span class="f-label">Confidence</span><span id="rConf" class="f-val"></span></div>
+      </div>
+      <div class="qline">
+        <div><span class="f-label">Original query</span><div id="rOrig" class="q-orig"></div></div>
+        <div><span class="f-label">Corrected query</span><div id="rCorr" class="q-corr"></div></div>
+      </div>
+      <div class="answer">
+        <span class="f-label">Result</span>
+        <div id="rText" class="answer-text"></div>
+        <div id="rTableWrap" class="table-wrap hidden"><table id="rTable"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+</body>
+</html>

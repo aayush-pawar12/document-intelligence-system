@@ -59,6 +59,16 @@ Every answer includes the five required fields:
 ============================================================
 ```
 
+## Web interface (optional)
+
+A small browser UI over the same engine — upload a file (or pick a sample), type
+a question, and see the structured result with the corrected query and matches
+highlighted:
+
+```bash
+python webapp.py        # -> http://127.0.0.1:5001
+```
+
 ## Running the tests
 
 ```bash
